@@ -1,77 +1,78 @@
 "use client";
 import * as THREE from "three";
+import { RoundedBox } from "@react-three/drei";
 
-/**
- * WHITE SIGNATURE SHIRT — premium cotton, 220 GSM
- * Procedural placeholder with distinct silhouette: fitted, 5 buttons, structured collar.
- * Production: replace with useGLTF('/models/outfits/white-shirt.glb')
- *   const { scene } = useGLTF('/models/outfits/white-shirt.glb')
- *   return <primitive object={scene} />
- * Keep same group refs/scale so GarmentController timeline stays valid.
- */
-export function WhiteShirt({
-  leftRef,
-  rightRef,
-  sleeveLRef,
-  sleeveRRef,
-  collarRef,
-}: {
+/** Editorial cotton shirt: layered torso, yoke, placket, collar, cuffs and tailored sleeves. */
+export function WhiteShirt({ leftRef, rightRef, sleeveLRef, sleeveRRef, collarRef }: {
   leftRef: React.RefObject<THREE.Mesh | null>;
   rightRef: React.RefObject<THREE.Mesh | null>;
   sleeveLRef: React.RefObject<THREE.Mesh | null>;
   sleeveRRef: React.RefObject<THREE.Mesh | null>;
   collarRef: React.RefObject<THREE.Mesh | null>;
 }) {
+  const fabric = "#f5f3ee";
+  const seam = "#dedbd3";
   return (
     <group>
-      <mesh position={[0, 1.08, -0.06]}>
-        <capsuleGeometry args={[0.335, 0.60, 8, 18]} />
-        <meshStandardMaterial color="#fafaf8" roughness={0.88} metalness={0} transparent />
+      <RoundedBox args={[0.66, 0.66, 0.30]} radius={0.10} smoothness={4} position={[0, 1.08, -0.035]}>
+        <meshPhysicalMaterial color={fabric} roughness={0.84} clearcoat={0.02} />
+      </RoundedBox>
+      {/* tailored shoulder yoke */}
+      <RoundedBox args={[0.70, 0.16, 0.32]} radius={0.05} smoothness={3} position={[0, 1.36, -0.025]}>
+        <meshStandardMaterial color={fabric} roughness={0.86} />
+      </RoundedBox>
+      {/* split front panels */}
+      <mesh ref={leftRef} position={[-0.175, 1.08, 0.145]}>
+        <boxGeometry args={[0.31, 0.62, 0.038]} />
+        <meshStandardMaterial color={fabric} roughness={0.86} transparent />
       </mesh>
-      <mesh ref={leftRef} position={[-0.18, 1.08, 0.09]}>
-        <boxGeometry args={[0.33, 0.62, 0.042]} />
-        <meshStandardMaterial color="#fafaf8" roughness={0.88} transparent />
+      <mesh ref={rightRef} position={[0.175, 1.08, 0.145]}>
+        <boxGeometry args={[0.31, 0.62, 0.038]} />
+        <meshStandardMaterial color={fabric} roughness={0.86} transparent />
       </mesh>
-      <mesh ref={rightRef} position={[0.18, 1.08, 0.09]}>
-        <boxGeometry args={[0.33, 0.62, 0.042]} />
-        <meshStandardMaterial color="#fafaf8" roughness={0.88} transparent />
+      {/* button placket */}
+      <mesh position={[0, 1.08, 0.168]}>
+        <boxGeometry args={[0.018, 0.54, 0.008]} />
+        <meshStandardMaterial color={seam} roughness={0.72} />
       </mesh>
-      <group position={[0, 1.08, 0.125]}>
-        {[0.22, 0.11, 0, -0.11, -0.22].map((y, i) => (
-          <mesh key={i} position={[0, y, 0]}>
-            <sphereGeometry args={[0.011, 10, 10]} />
-            <meshStandardMaterial color="#1a1a1e" roughness={0.45} metalness={0.15} transparent />
-          </mesh>
-        ))}
+      {[0.22, 0.11, 0, -0.11, -0.22].map((y, i) => (
+        <mesh key={i} position={[0, 1.08 + y, 0.178]}>
+          <sphereGeometry args={[0.012, 12, 10]} />
+          <meshStandardMaterial color="#34363a" roughness={0.35} metalness={0.05} />
+        </mesh>
+      ))}
+      {/* spread collar */}
+      <group ref={collarRef} position={[0, 1.405, 0.15]}>
+        <mesh rotation={[0.18, 0, 0.30]} position={[-0.085, -0.015, 0]}>
+          <boxGeometry args={[0.19, 0.075, 0.025]} />
+          <meshStandardMaterial color={fabric} roughness={0.82} />
+        </mesh>
+        <mesh rotation={[0.18, 0, -0.30]} position={[0.085, -0.015, 0]}>
+          <boxGeometry args={[0.19, 0.075, 0.025]} />
+          <meshStandardMaterial color={fabric} roughness={0.82} />
+        </mesh>
       </group>
-      <mesh ref={collarRef} position={[0, 1.38, 0.12]} rotation={[0.16, 0, 0]}>
-        <torusGeometry args={[0.132, 0.020, 10, 28, Math.PI * 1.26]} />
-        <meshStandardMaterial color="#fafaf8" roughness={0.86} transparent />
+      {/* sleeves */}
+      <mesh ref={sleeveLRef} position={[-0.48, 1.03, 0]} rotation={[0, 0, 0.08]}>
+        <capsuleGeometry args={[0.105, 0.48, 8, 18]} />
+        <meshStandardMaterial color={fabric} roughness={0.86} transparent />
       </mesh>
-      <mesh position={[-0.10, 1.38, 0.15]} rotation={[0.44, 0, 0.32]}>
-        <boxGeometry args={[0.095, 0.068, 0.012]} />
-        <meshStandardMaterial color="#fafaf8" roughness={0.86} transparent />
+      <mesh ref={sleeveRRef} position={[0.48, 1.03, 0]} rotation={[0, 0, -0.08]}>
+        <capsuleGeometry args={[0.105, 0.48, 8, 18]} />
+        <meshStandardMaterial color={fabric} roughness={0.86} transparent />
       </mesh>
-      <mesh position={[0.10, 1.38, 0.15]} rotation={[0.44, 0, -0.32]}>
-        <boxGeometry args={[0.095, 0.068, 0.012]} />
-        <meshStandardMaterial color="#fafaf8" roughness={0.86} transparent />
+      {/* cuffs */}
+      <mesh position={[-0.51, 0.75, 0.01]} rotation={[0, 0, 0.08]}>
+        <boxGeometry args={[0.19, 0.075, 0.18]} />
+        <meshStandardMaterial color={fabric} roughness={0.82} transparent />
       </mesh>
-      <mesh ref={sleeveLRef} position={[-0.46, 1.02, 0]} rotation={[0, 0, 0.07]}>
-        <capsuleGeometry args={[0.102, 0.52, 6, 14]} />
-        <meshStandardMaterial color="#fafaf8" roughness={0.88} transparent />
+      <mesh position={[0.51, 0.75, 0.01]} rotation={[0, 0, -0.08]}>
+        <boxGeometry args={[0.19, 0.075, 0.18]} />
+        <meshStandardMaterial color={fabric} roughness={0.82} transparent />
       </mesh>
-      <mesh ref={sleeveRRef} position={[0.46, 1.02, 0]} rotation={[0, 0, -0.07]}>
-        <capsuleGeometry args={[0.102, 0.52, 6, 14]} />
-        <meshStandardMaterial color="#fafaf8" roughness={0.88} transparent />
-      </mesh>
-      <mesh position={[-0.50, 0.74, 0.02]} rotation={[0, 0, 0.07]}>
-        <cylinderGeometry args={[0.090, 0.090, 0.055, 16]} />
-        <meshStandardMaterial color="#fafaf8" roughness={0.82} transparent />
-      </mesh>
-      <mesh position={[0.50, 0.74, 0.02]} rotation={[0, 0, -0.07]}>
-        <cylinderGeometry args={[0.090, 0.090, 0.055, 16]} />
-        <meshStandardMaterial color="#fafaf8" roughness={0.82} transparent />
-      </mesh>
+      {/* subtle seam lines */}
+      <mesh position={[-0.325, 1.08, 0.151]}><boxGeometry args={[0.008, 0.53, 0.004]} /><meshStandardMaterial color={seam} roughness={0.9} /></mesh>
+      <mesh position={[0.325, 1.08, 0.151]}><boxGeometry args={[0.008, 0.53, 0.004]} /><meshStandardMaterial color={seam} roughness={0.9} /></mesh>
     </group>
   );
 }
