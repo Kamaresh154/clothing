@@ -1,3 +1,3 @@
 "use client";
 
-export { default } from "./ImmersiveOutfitScene";
+export { default } from "./ScrollFashionVideo";
