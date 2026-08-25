@@ -1,4 +1,4 @@
-export type GarmentType = "shirt" | "silk-shirt" | "overshirt" | "jacket" | "suit";
+export type GarmentType = "tailoring" | "silk-shirt" | "suede-bomber" | "utility-jacket" | "suit";
 
 export type Outfit = {
   id: string;
@@ -9,108 +9,78 @@ export type Outfit = {
   price: number;
   material: string;
   details: string[];
-  garment: {
-    type: GarmentType;
-    color: string;
-    roughness: number;
-    metalness: number;
-    sheen: number;
-    description: string;
-    asset: string;
-  };
-  layers: {
-    base: boolean;
-    outer: boolean;
-    trousers: boolean;
-    accessories: boolean;
-  };
-  silhouette: {
-    shoulderWidth: number;
-    torsoHeight: number;
-    torsoWidth: number;
-    sleeveRadius: number;
-    sleeveLength: number;
-    hasLapels: boolean;
-    hasPockets: boolean;
-    buttonCount: number;
-  };
-  palette: {
-    top: string;
-    top2: string;
-    outer: string;
-    outer2: string;
-    bottom: string;
-    shoes: string;
-    skin: string;
-  };
+  garment: { type: GarmentType; color: string; roughness: number; metalness: number; sheen: number; description: string; asset: string };
+  layers: { base: boolean; outer: boolean; trousers: boolean; accessories: boolean };
+  silhouette: { shoulderWidth: number; torsoHeight: number; torsoWidth: number; sleeveRadius: number; sleeveLength: number; hasLapels: boolean; hasPockets: boolean; buttonCount: number };
+  palette: { top: string; top2: string; outer: string; outer2: string; bottom: string; shoes: string; skin: string };
   camera: { pos: [number, number, number]; look: [number, number, number] };
   light: { intensity: number; color: string; fog: string };
 };
 
 export const outfits: Outfit[] = [
   {
-    id: "shirt-01",
-    name: "WHITE SIGNATURE SHIRT",
-    subtitle: "LOOK 01 — THE WHITE SIGNATURE",
-    headline: "THE WHITE\nSIGNATURE",
-    sub: "Crisp white premium cotton / Relaxed structure / 220 GSM",
-    price: 12900,
-    material: "Premium Cotton Poplin • 220 GSM • Garment Washed",
-    details: ["220 GSM Premium Cotton", "Mother-of-Pearl Buttons", "Structured Collar"],
-    garment: { type: "shirt", color: "#fafaf8", roughness: 0.88, metalness: 0.0, sheen: 0.22, description: "Crisp • Structured • Slightly rough", asset: "/models/white-shirt.glb" },
-    layers: { base: true, outer: false, trousers: true, accessories: false },
-    silhouette: { shoulderWidth: 0.46, torsoHeight: 0.60, torsoWidth: 0.34, sleeveRadius: 0.102, sleeveLength: 0.52, hasLapels: false, hasPockets: false, buttonCount: 5 },
-    palette: { top: "#fafaf8", top2: "#ece9e2", outer: "#fafaf8", outer2: "#ece9e2", bottom: "#1a1c1e", shoes: "#ece6da", skin: "#c9b99a" },
-    camera: { pos: [0, 1.55, 4.4], look: [0, 1.42, 0] },
-    light: { intensity: 1.15, color: "#fff8ec", fog: "#0a0a0c" },
+    id: "tailoring-01",
+    name: "CHARCOAL RELAXED TAILORING",
+    subtitle: "LOOK 01 — THE NEW TAILOR",
+    headline: "THE NEW\nTAILOR",
+    sub: "Relaxed charcoal blazer / Textured knit polo / Wide-leg trousers",
+    price: 32900,
+    material: "Soft Wool Blend • Relaxed Construction • 2026 Silhouette",
+    details: ["Relaxed Shoulder", "Textured Knit Polo", "Wide-Leg Trouser"],
+    garment: { type: "tailoring", color: "#25262a", roughness: 0.76, metalness: 0, sheen: 0.2, description: "Soft • Structured • Relaxed", asset: "/models/charcoal-tailoring.glb" },
+    layers: { base: true, outer: true, trousers: true, accessories: true },
+    silhouette: { shoulderWidth: 0.52, torsoHeight: 0.72, torsoWidth: 0.40, sleeveRadius: 0.112, sleeveLength: 0.58, hasLapels: true, hasPockets: true, buttonCount: 2 },
+    palette: { top: "#18191c", top2: "#292a2e", outer: "#25262a", outer2: "#36373c", bottom: "#17181b", shoes: "#08090a", skin: "#b98f73" },
+    camera: { pos: [0, 1.5, 4.5], look: [0, 1.35, 0] },
+    light: { intensity: 1.15, color: "#efe5d6", fog: "#08090b" },
   },
   {
-    id: "shirt-02",
-    name: "THE NIGHT SHIRT",
-    subtitle: "LOOK 02 — THE NIGHT SHIRT",
-    headline: "THE NIGHT\nSHIRT",
-    sub: "Pure silk / Relaxed structure / Signature cut",
+    id: "silk-02",
+    name: "BLACK SILK SHIRT",
+    subtitle: "LOOK 02 — LIQUID BLACK",
+    headline: "LIQUID\nBLACK",
+    sub: "Pure silk / Fluid drape / Relaxed collar",
     price: 18900,
     material: "Pure Mulberry Silk • 19 Momme • Fluid Drape",
-    details: ["Pure Silk", "Relaxed Structure", "Signature Cut"],
-    garment: { type: "silk-shirt", color: "#0c0c0e", roughness: 0.28, metalness: 0.06, sheen: 0.85, description: "Fluid • Reflective • Soft", asset: "/models/black-silk-shirt.glb" },
+    details: ["Pure Silk", "Fluid Drape", "Relaxed Collar"],
+    garment: { type: "silk-shirt", color: "#08090b", roughness: 0.20, metalness: 0.02, sheen: 0.9, description: "Fluid • Reflective • Soft", asset: "/models/black-silk-shirt.glb" },
     layers: { base: true, outer: false, trousers: true, accessories: true },
-    silhouette: { shoulderWidth: 0.48, torsoHeight: 0.62, torsoWidth: 0.335, sleeveRadius: 0.098, sleeveLength: 0.56, hasLapels: false, hasPockets: false, buttonCount: 4 },
-    palette: { top: "#0c0c0e", top2: "#1a1a1e", outer: "#0c0c0e", outer2: "#1a1a1e", bottom: "#0a0a0c", shoes: "#0a0a0c", skin: "#c9b99a" },
-    camera: { pos: [1.1, 1.6, 3.2], look: [0, 1.46, 0] },
-    light: { intensity: 0.92, color: "#8a7dff", fog: "#07070a" },
+    silhouette: { shoulderWidth: 0.49, torsoHeight: 0.64, torsoWidth: 0.35, sleeveRadius: 0.10, sleeveLength: 0.56, hasLapels: false, hasPockets: false, buttonCount: 5 },
+    palette: { top: "#08090b", top2: "#1a1b20", outer: "#08090b", outer2: "#1a1b20", bottom: "#111216", shoes: "#050608", skin: "#b98f73" },
+    camera: { pos: [1.05, 1.55, 3.6], look: [0, 1.35, 0] },
+    light: { intensity: 1.0, color: "#aaa5c8", fog: "#07080b" },
   },
   {
-    id: "jacket-03",
-    name: "BEIGE OVERSHIRT JACKET",
-    subtitle: "LOOK 03 — THE BEIGE JACKET",
-    headline: "THE\nBEIGE\nJACKET",
-    sub: "Structured wool overshirt / Wider shoulders / Lapels",
-    price: 24900,
-    material: "Wool Blend • Brushed • Structured",
-    details: ["Structured Wool", "Wider Shoulders", "Lapels & Pockets"],
-    garment: { type: "jacket", color: "#cbbca0", roughness: 0.82, metalness: 0.01, sheen: 0.18, description: "Structured • Wool • Higher roughness", asset: "/models/beige-jacket.glb" },
+    id: "utility-03",
+    name: "OLIVE UTILITY JACKET",
+    subtitle: "LOOK 03 — FIELD / FORM",
+    headline: "FIELD /\nFORM",
+    sub: "Olive utility jacket / Structured pockets / Roomy trousers",
+    price: 27900,
+    material: "Washed Cotton Nylon • Utility Weave • Structured",
+    details: ["Utility Pockets", "Washed Texture", "Roomy Silhouette"],
+    garment: { type: "utility-jacket", color: "#3d4435", roughness: 0.86, metalness: 0.01, sheen: 0.12, description: "Dry • Textured • Utility", asset: "/models/olive-utility-jacket.glb" },
     layers: { base: true, outer: true, trousers: true, accessories: true },
-    silhouette: { shoulderWidth: 0.54, torsoHeight: 0.70, torsoWidth: 0.40, sleeveRadius: 0.115, sleeveLength: 0.58, hasLapels: true, hasPockets: true, buttonCount: 3 },
-    palette: { top: "#cbbca0", top2: "#b8a88c", outer: "#cbbca0", outer2: "#b8a88c", bottom: "#222326", shoes: "#ece6da", skin: "#c9b99a" },
-    camera: { pos: [-1.05, 1.2, 3.9], look: [0, 1.02, 0] },
-    light: { intensity: 1.22, color: "#ffe0b8", fog: "#0f0e0c" },
+    silhouette: { shoulderWidth: 0.55, torsoHeight: 0.72, torsoWidth: 0.42, sleeveRadius: 0.12, sleeveLength: 0.60, hasLapels: false, hasPockets: true, buttonCount: 4 },
+    palette: { top: "#171a16", top2: "#252a22", outer: "#3d4435", outer2: "#59604d", bottom: "#1d211b", shoes: "#111210", skin: "#b98f73" },
+    camera: { pos: [-1.0, 1.38, 4.0], look: [0, 1.28, 0] },
+    light: { intensity: 1.18, color: "#d7c8a9", fog: "#0b0d0a" },
   },
   {
     id: "suit-final",
-    name: "DARK LUXURY SUIT",
-    subtitle: "FINAL LOOK — THE STATEMENT SUIT",
-    headline: "DRESS\nDIFFERENT.",
-    sub: "Dense wool • Tailored • Premium dark",
+    name: "DEEP NAVY RELAXED SUIT",
+    subtitle: "FINAL LOOK — AFTER DARK",
+    headline: "AFTER\nDARK",
+    sub: "Relaxed double-breasted tailoring / Deep navy / Wide trouser",
     price: 45900,
-    material: "Double-Face Wool • Hand Pressed • Limited 120 pcs",
-    details: ["Architectural Cut", "Double-Face Wool", "Atelier Made"],
-    garment: { type: "suit", color: "#131316", roughness: 0.64, metalness: 0.04, sheen: 0.28, description: "Dense • Matte • Structured", asset: "/models/statement-suit.glb" },
+    material: "Dense Merino Wool • Soft Tailoring • Limited Run",
+    details: ["Soft Shoulder", "Double-Breasted", "Wide Trouser"],
+    garment: { type: "suit", color: "#111a2b", roughness: 0.60, metalness: 0.02, sheen: 0.30, description: "Dense • Matte • Tailored", asset: "/models/deep-navy-suit.glb" },
     layers: { base: true, outer: true, trousers: true, accessories: true },
-    silhouette: { shoulderWidth: 0.56, torsoHeight: 0.74, torsoWidth: 0.42, sleeveRadius: 0.112, sleeveLength: 0.57, hasLapels: true, hasPockets: true, buttonCount: 2 },
-    palette: { top: "#0f0f12", top2: "#1e1e22", outer: "#131316", outer2: "#1e1e22", bottom: "#0a0a0c", shoes: "#08080a", skin: "#c9b99a" },
-    camera: { pos: [0, 1.35, 5.0], look: [0, 1.32, 0] },
-    light: { intensity: 1.35, color: "#ffe8c8", fog: "#0a0a0c" },
+    silhouette: { shoulderWidth: 0.57, torsoHeight: 0.76, torsoWidth: 0.43, sleeveRadius: 0.115, sleeveLength: 0.58, hasLapels: true, hasPockets: true, buttonCount: 4 },
+    palette: { top: "#080d16", top2: "#172238", outer: "#111a2b", outer2: "#243653", bottom: "#0a101c", shoes: "#050609", skin: "#b98f73" },
+    camera: { pos: [0, 1.45, 4.9], look: [0, 1.35, 0] },
+    light: { intensity: 1.32, color: "#dce6ff", fog: "#070a12" },
   },
 ];
 
