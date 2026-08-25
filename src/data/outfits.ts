@@ -1,3 +1,5 @@
+export type GarmentType = "shirt" | "silk-shirt" | "overshirt" | "jacket" | "suit";
+
 export type Outfit = {
   id: string;
   name: string;
@@ -8,12 +10,28 @@ export type Outfit = {
   material: string;
   details: string[];
   garment: {
-    type: "shirt";
+    type: GarmentType;
     color: string;
     roughness: number;
     metalness: number;
     sheen: number;
     description: string;
+  };
+  layers: {
+    base: boolean;
+    outer: boolean;
+    trousers: boolean;
+    accessories: boolean;
+  };
+  silhouette: {
+    shoulderWidth: number; // 0.34 = fitted, 0.42 = wide
+    torsoHeight: number;
+    torsoWidth: number;
+    sleeveRadius: number;
+    sleeveLength: number;
+    hasLapels: boolean;
+    hasPockets: boolean;
+    buttonCount: number;
   };
   palette: {
     top: string;
@@ -41,10 +59,21 @@ export const outfits: Outfit[] = [
     garment: {
       type: "shirt",
       color: "#fafaf8",
-      roughness: 0.85,
+      roughness: 0.88,
       metalness: 0.0,
       sheen: 0.22,
       description: "Crisp • Structured • Slightly rough",
+    },
+    layers: { base: true, outer: false, trousers: true, accessories: false },
+    silhouette: {
+      shoulderWidth: 0.46,
+      torsoHeight: 0.60,
+      torsoWidth: 0.34,
+      sleeveRadius: 0.102,
+      sleeveLength: 0.52,
+      hasLapels: false,
+      hasPockets: false,
+      buttonCount: 5,
     },
     palette: {
       top: "#fafaf8",
@@ -66,21 +95,32 @@ export const outfits: Outfit[] = [
     sub: "Pure silk / Relaxed structure / Signature cut",
     price: 18900,
     material: "Pure Mulberry Silk • 19 Momme • Fluid Drape",
+    details: ["Pure Silk", "Relaxed Structure", "Signature Cut"],
     garment: {
-      type: "shirt",
+      type: "silk-shirt",
       color: "#0c0c0e",
-      roughness: 0.32,
-      metalness: 0.08,
+      roughness: 0.28,
+      metalness: 0.06,
       sheen: 0.85,
       description: "Fluid • Reflective • Soft",
     },
-    details: ["Pure Silk", "Relaxed Structure", "Signature Cut"],
+    layers: { base: true, outer: false, trousers: true, accessories: true },
+    silhouette: {
+      shoulderWidth: 0.48,
+      torsoHeight: 0.62,
+      torsoWidth: 0.335,
+      sleeveRadius: 0.098,
+      sleeveLength: 0.56,
+      hasLapels: false,
+      hasPockets: false,
+      buttonCount: 4,
+    },
     palette: {
       top: "#0c0c0e",
       top2: "#1a1a1e",
       outer: "#0c0c0e",
       outer2: "#1a1a1e",
-      bottom: "#0e0e10",
+      bottom: "#0a0a0c",
       shoes: "#0a0a0c",
       skin: "#c9b99a",
     },
@@ -88,22 +128,33 @@ export const outfits: Outfit[] = [
     light: { intensity: 0.92, color: "#8a7dff", fog: "#07070a" },
   },
   {
-    id: "shirt-03",
-    name: "THE EVERYDAY ICON",
-    subtitle: "LOOK 03 — THE EVERYDAY ICON",
-    headline: "THE\nEVERYDAY\nICON",
-    sub: "Textured cotton / Oversized fit / Garment dyed",
-    price: 12900,
-    material: "Textured Cotton • Slub Weave • Oversized",
+    id: "jacket-03",
+    name: "BEIGE OVERSHIRT JACKET",
+    subtitle: "LOOK 03 — THE BEIGE JACKET",
+    headline: "THE\nBEIGE\nJACKET",
+    sub: "Structured wool overshirt / Wider shoulders / Lapels",
+    price: 24900,
+    material: "Wool Blend • Brushed • Structured",
+    details: ["Structured Wool", "Wider Shoulders", "Lapels & Pockets"],
     garment: {
-      type: "shirt",
+      type: "jacket",
       color: "#cbbca0",
-      roughness: 0.92,
-      metalness: 0.0,
-      sheen: 0.12,
-      description: "Textured • Naturally wrinkled • Dense",
+      roughness: 0.82,
+      metalness: 0.01,
+      sheen: 0.18,
+      description: "Structured • Wool • Higher roughness",
     },
-    details: ["Textured Cotton", "Oversized Fit", "Garment Dyed"],
+    layers: { base: true, outer: true, trousers: true, accessories: true },
+    silhouette: {
+      shoulderWidth: 0.54,
+      torsoHeight: 0.70,
+      torsoWidth: 0.40,
+      sleeveRadius: 0.115,
+      sleeveLength: 0.58,
+      hasLapels: true,
+      hasPockets: true,
+      buttonCount: 3,
+    },
     palette: {
       top: "#cbbca0",
       top2: "#b8a88c",
@@ -117,29 +168,40 @@ export const outfits: Outfit[] = [
     light: { intensity: 1.22, color: "#ffe0b8", fog: "#0f0e0c" },
   },
   {
-    id: "look-final",
-    name: "DRESS DIFFERENT.",
-    subtitle: "FINAL LOOK — THE STATEMENT",
+    id: "suit-final",
+    name: "DARK LUXURY SUIT",
+    subtitle: "FINAL LOOK — THE STATEMENT SUIT",
     headline: "DRESS\nDIFFERENT.",
-    sub: "Crafted for the man who doesn't need to explain his style",
+    sub: "Dense wool • Tailored • Premium dark",
     price: 45900,
     material: "Double-Face Wool • Hand Pressed • Limited 120 pcs",
+    details: ["Architectural Cut", "Double-Face Wool", "Atelier Made"],
     garment: {
-      type: "shirt",
-      color: "#c9b99a",
-      roughness: 0.68,
+      type: "suit",
+      color: "#131316",
+      roughness: 0.64,
       metalness: 0.04,
-      sheen: 0.3,
+      sheen: 0.28,
       description: "Dense • Matte • Structured",
     },
-    details: ["Architectural Cut", "Double-Face Wool", "Atelier Made"],
+    layers: { base: true, outer: true, trousers: true, accessories: true },
+    silhouette: {
+      shoulderWidth: 0.56,
+      torsoHeight: 0.74,
+      torsoWidth: 0.42,
+      sleeveRadius: 0.112,
+      sleeveLength: 0.57,
+      hasLapels: true,
+      hasPockets: true,
+      buttonCount: 2,
+    },
     palette: {
       top: "#0f0f12",
       top2: "#1e1e22",
-      outer: "#c9b99a",
-      outer2: "#a8987a",
-      bottom: "#141518",
-      shoes: "#0f0f12",
+      outer: "#131316",
+      outer2: "#1e1e22",
+      bottom: "#0a0a0c",
+      shoes: "#08080a",
       skin: "#c9b99a",
     },
     camera: { pos: [0, 1.35, 5.0], look: [0, 1.32, 0] },

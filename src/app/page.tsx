@@ -126,12 +126,12 @@ export default function Home() {
     return progress > 0.88 && progress < 0.98;
   })();
 
-  // product mapping for outfit -> product
+  // product mapping for outfit -> product (supports GLB replacement later)
   const outfitProductMap: Record<string, string> = {
-    "shirt-01": "p-05", // ESSENTIAL SHIRT
-    "shirt-02": "p-06", // CASHMERE / use as silk proxy - we'll map to p-06
-    "shirt-03": "p-02", // HEAVY COTTON TEE as textured
-    "look-final": "p-04",
+    "shirt-01": "p-05", // WHITE SIGNATURE SHIRT
+    "shirt-02": "p-06", // THE NIGHT SHIRT (silk)
+    "jacket-03": "p-01", // BEIGE JACKET -> Signature Wool Jacket (camel)
+    "suit-final": "p-04", // DARK SUIT -> Double-Face Overcoat
   };
 
   return (
