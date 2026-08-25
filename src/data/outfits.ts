@@ -1,4 +1,4 @@
-export type GarmentType = "tailoring" | "silk-shirt" | "suede-bomber" | "utility-jacket" | "suit";
+export type GarmentType = "shirt" | "silk-shirt" | "overshirt" | "jacket" | "suit";
 
 export type Outfit = {
   id: string;
@@ -19,7 +19,7 @@ export type Outfit = {
 
 export const outfits: Outfit[] = [
   {
-    id: "tailoring-01",
+    id: "shirt-01",
     name: "CHARCOAL RELAXED TAILORING",
     subtitle: "LOOK 01 — THE NEW TAILOR",
     headline: "THE NEW\nTAILOR",
@@ -27,7 +27,7 @@ export const outfits: Outfit[] = [
     price: 32900,
     material: "Soft Wool Blend • Relaxed Construction • 2026 Silhouette",
     details: ["Relaxed Shoulder", "Textured Knit Polo", "Wide-Leg Trouser"],
-    garment: { type: "tailoring", color: "#25262a", roughness: 0.76, metalness: 0, sheen: 0.2, description: "Soft • Structured • Relaxed", asset: "/models/charcoal-tailoring.glb" },
+    garment: { type: "jacket", color: "#25262a", roughness: 0.76, metalness: 0, sheen: 0.2, description: "Soft • Structured • Relaxed", asset: "/models/charcoal-tailoring.glb" },
     layers: { base: true, outer: true, trousers: true, accessories: true },
     silhouette: { shoulderWidth: 0.52, torsoHeight: 0.72, torsoWidth: 0.40, sleeveRadius: 0.112, sleeveLength: 0.58, hasLapels: true, hasPockets: true, buttonCount: 2 },
     palette: { top: "#18191c", top2: "#292a2e", outer: "#25262a", outer2: "#36373c", bottom: "#17181b", shoes: "#08090a", skin: "#b98f73" },
@@ -35,7 +35,7 @@ export const outfits: Outfit[] = [
     light: { intensity: 1.15, color: "#efe5d6", fog: "#08090b" },
   },
   {
-    id: "silk-02",
+    id: "shirt-02",
     name: "BLACK SILK SHIRT",
     subtitle: "LOOK 02 — LIQUID BLACK",
     headline: "LIQUID\nBLACK",
@@ -51,7 +51,7 @@ export const outfits: Outfit[] = [
     light: { intensity: 1.0, color: "#aaa5c8", fog: "#07080b" },
   },
   {
-    id: "utility-03",
+    id: "jacket-03",
     name: "OLIVE UTILITY JACKET",
     subtitle: "LOOK 03 — FIELD / FORM",
     headline: "FIELD /\nFORM",
@@ -59,7 +59,7 @@ export const outfits: Outfit[] = [
     price: 27900,
     material: "Washed Cotton Nylon • Utility Weave • Structured",
     details: ["Utility Pockets", "Washed Texture", "Roomy Silhouette"],
-    garment: { type: "utility-jacket", color: "#3d4435", roughness: 0.86, metalness: 0.01, sheen: 0.12, description: "Dry • Textured • Utility", asset: "/models/olive-utility-jacket.glb" },
+    garment: { type: "overshirt", color: "#3d4435", roughness: 0.86, metalness: 0.01, sheen: 0.12, description: "Dry • Textured • Utility", asset: "/models/olive-utility-jacket.glb" },
     layers: { base: true, outer: true, trousers: true, accessories: true },
     silhouette: { shoulderWidth: 0.55, torsoHeight: 0.72, torsoWidth: 0.42, sleeveRadius: 0.12, sleeveLength: 0.60, hasLapels: false, hasPockets: true, buttonCount: 4 },
     palette: { top: "#171a16", top2: "#252a22", outer: "#3d4435", outer2: "#59604d", bottom: "#1d211b", shoes: "#111210", skin: "#b98f73" },
