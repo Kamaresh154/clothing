@@ -6,15 +6,14 @@ import { useGLTF } from "@react-three/drei";
 import * as THREE from "three";
 
 /**
- * Real GLB male base model.
- * The clothing system remains separate so scroll can swap the garments over
- * the same human figure instead of rebuilding a mannequin for every look.
+ * Real rigged male base model.
+ * The garment components remain separate so the scroll controller can change
+ * menswear over the same human figure.
  *
- * Source model: CC0 male base mesh published by Siddu7077/3D-model.
- * We normalize its bounds at runtime so the existing garment coordinates keep
- * their alignment across the page experience.
+ * Source: orange-juice-games male base mesh, CC0 1.0, rehosted by
+ * BoQsc/Godot-3D-Male-Base-Mesh.
  */
-const MODEL_URL = "https://raw.githubusercontent.com/Siddu7077/3D-model/main/rbb.glb";
+const MODEL_URL = "https://raw.githubusercontent.com/BoQsc/Godot-3D-Male-Base-Mesh/main/Original/male_base_mesh.glb";
 
 function RealMaleModel({ progress }: { progress: number }) {
   const groupRef = useRef<THREE.Group>(null);
@@ -26,8 +25,7 @@ function RealMaleModel({ progress }: { progress: number }) {
     const size = box.getSize(new THREE.Vector3());
     const center = box.getCenter(new THREE.Vector3());
     const height = Math.max(size.y, 0.001);
-    const targetHeight = 2.9;
-    const scale = targetHeight / height;
+    const scale = 2.9 / height;
 
     clone.scale.setScalar(scale);
     clone.position.x -= center.x * scale;
@@ -36,15 +34,11 @@ function RealMaleModel({ progress }: { progress: number }) {
 
     clone.traverse((object) => {
       const mesh = object as THREE.Mesh;
-      if (mesh.isMesh) {
-        mesh.castShadow = true;
-        mesh.receiveShadow = true;
-        const material = mesh.material as THREE.MeshStandardMaterial | THREE.MeshPhysicalMaterial;
-        if (material) {
-          material.roughness = Math.max(material.roughness ?? 0.65, 0.45);
-          material.envMapIntensity = 0.9;
-        }
-      }
+      if (!mesh.isMesh) return;
+      mesh.castShadow = true;
+      mesh.receiveShadow = true;
+      const material = mesh.material as THREE.MeshStandardMaterial | THREE.MeshPhysicalMaterial;
+      if (material) material.envMapIntensity = 0.9;
     });
 
     return clone;
@@ -54,14 +48,15 @@ function RealMaleModel({ progress }: { progress: number }) {
     if (!groupRef.current) return;
     const t = state.clock.elapsedTime;
     const reduced = typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const targetY = -0.95 + (reduced ? 0 : Math.sin(t * 0.52) * 0.008);
-    const targetRot = progress * 0.075 + (reduced ? 0 : Math.sin(t * 0.22) * 0.012);
 
-    groupRef.current.position.y = THREE.MathUtils.lerp(groupRef.current.position.y, targetY, 0.08);
-    groupRef.current.rotation.y = THREE.MathUtils.lerp(groupRef.current.rotation.y, targetRot, 0.08);
-    groupRef.current.rotation.z = THREE.MathUtils.lerp(
-      groupRef.current.rotation.z,
-      reduced ? 0 : Math.sin(t * 0.28) * 0.004,
+    groupRef.current.position.y = THREE.MathUtils.lerp(
+      groupRef.current.position.y,
+      -0.95 + (reduced ? 0 : Math.sin(t * 0.52) * 0.008),
+      0.08,
+    );
+    groupRef.current.rotation.y = THREE.MathUtils.lerp(
+      groupRef.current.rotation.y,
+      progress * 0.075 + (reduced ? 0 : Math.sin(t * 0.22) * 0.012),
       0.08,
     );
   });
